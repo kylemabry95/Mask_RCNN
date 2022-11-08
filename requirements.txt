@@ -1,7 +1,8 @@
 cython
 matplotlib
 scikit-image
-tensorflow==2.8
+tensorflow==2.4
 opencv-python
 h5py
 imgaug
+pycocotools
