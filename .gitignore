@@ -56,3 +56,5 @@ pip-delete-this-directory.txt
 .venv
 venv/
 ENV/
+samples/model.tar.gz
+*.data-00000-of-00001

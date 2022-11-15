@@ -14,6 +14,7 @@ import itertools
 import colorsys
 
 import numpy as np
+import cv2
 from skimage.measure import find_contours
 import matplotlib.pyplot as plt
 from matplotlib import patches,  lines
@@ -146,8 +147,20 @@ def display_instances(image, boxes, masks, class_ids, class_names,
         ax.text(x1, y1 + 8, caption,
                 color='w', size=11, backgroundcolor="none")
 
-        # Mask
+        # Mask - This block was added to save an image of a person
         mask = masks[:, :, i]
+        if label=="person":
+            # Write each mask to memory
+            filename = "../masks/mask_{}.jpg".format(i)
+            print(filename)
+            
+            x,y,w,h = cv2.boundingRect(mask.astype(np.uint8))
+            clipping_image = image[y:y+h,x:x+w, :]
+            
+            cv2.imwrite(filename, clipping_image.astype(np.uint8))
+            print("Wrote a mask to memory")
+            
+            
         if show_mask:
             masked_image = apply_mask(masked_image, mask, color)
 
